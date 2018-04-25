@@ -17,11 +17,6 @@ int main(int argc, char const *argv[])
 		n-=498;
 		d=to_string(n);
 		cout<<d.at(d.length()-2)<<endl;
-
-		//otra solucion:
-		// https://github.com/ackoroa/UVa-Solutions/blob/master/UVa%2011547%20-%20Automatic%20Answer/src/UVa%2011547%20-%20Automatic%20Answer.cpp
-		//n = abs((((n * 63 + 7492) * 5 - 498)/10)%10);
-		//cout<<n<<endl;
 	}
 	return 0;
 }
