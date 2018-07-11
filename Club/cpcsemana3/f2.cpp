@@ -2,55 +2,32 @@
 using namespace std;
 
 int main(){
-	//ios::sync_with_stdio(false);
-	//cin.tie(NULL);
-	freopen("input.txt","r",stdin);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	//freopen("input.txt","r",stdin);
 	int n;
 	stack <int> p;
-	while(cin>>n, n!=0){
-		int v[n], sal[n];
-		for(int i=0;i<n;i++) cin>>v[i];
+	while(cin>>n,n!=0){
+		if(n==0) break;
+		int v[n];
 		bool ok=true;
+		for(int i=0;i<n;i++) cin>>v[i];
 
+		int ant=0;
 		int e=1;
 		for(int i=0;i<n;i++){
-			if(v[i]==e){
-				sal[e-1]=v[i];
+			if(v[i]==e)
 				e++;
-			} 
 			else{
-				p.push(v[i]);
+				if(abs(v[i]-ant)>1 && ant!=0){
+					ok=false;
+					//cout<<v[i]<<" "<<ant;
+				}
+				ant=v[i];
 			}
 		}
-		e--;
-		while(p.size()){
-			sal[e]=p.top();
-			p.pop();
-			e++;
-		}
-
-		for(int i=0;i<n;i++){
-			if(sal[i]!=i+1) ok=false;
-		}
-
-
-		//DEBUG
-		/*
-		cout<<e;
-		cout<<"\n";
-		for(int i=0;i<e;i++) cout<<sal[i]<<" ";
-		cout<<"\n";
-		while(p.size()){
-			cout<<p.top()<<" ";
-			p.pop();
-		}
-		*/
-
-		if(ok) cout<<"yes\n";
-		else cout<<"no\n";
+		ok?cout<<"yes\n":cout<<"no\n";
 	}
-
-
 
 	return 0;
 }

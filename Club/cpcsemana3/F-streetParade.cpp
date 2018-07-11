@@ -4,11 +4,13 @@ using namespace std;
 int main(){
 	//ios::sync_with_stdio(false);
 	//cin.tie(NULL);
-	freopen("input.txt","r",stdin);
+	//freopen("input.txt","r",stdin);
 	int n;
 	stack <int> p;
 	while(cin>>n, n!=0){
+		if(n==0) break;
 		int v[n], sal[n];
+		for(int i=0;i<n;i++) sal[i]=0;
 		for(int i=0;i<n;i++) cin>>v[i];
 		bool ok=true;
 
@@ -61,3 +63,21 @@ int main(){
 
 	return 0;
 }
+/*
+6
+0 5
+31 81
+5 6
+81 92
+6 107
+92 0
+
+6
+0 2
+1 3
+2 4
+3 5
+4 6
+5 0
+
+*/
