@@ -4,8 +4,8 @@ using namespace std;
 #define forn(i,n) forr(i,0,n)
 #define sz(c) ((int)c.size())
 #define zero(v) memset(v, 0, sizeof(v))
-#define pb push_back
 #define forall(it,v) for(auto it=v.begin();it!=v.end();++it)
+#define pb push_back
 #define fst first
 #define snd second
 typedef long long ll;
@@ -18,52 +18,44 @@ typedef pair<int,int> ii;
 #define dprv(vec) dpra(vec,sz(vec))
 typedef vector<int> vi;
 
-struct UnionFind{
-	vector<int> f;
-	void init(int n){
-		f.clear(); f.insert(f.begin(),n,-1);
+const int MAXN=1e6+5;
+const int INF=1e8+5;
+int n;
+
+bool esta[MAXN];
+int dp[MAXN];
+
+int f(int x){
+	if(dp[x]!=-1)
+		return dp[x];
+	int rta=1;
+	int i=2;
+	while(x*i<MAXN){
+		if(esta[x*i])
+			rta=max(rta,f(x*i)+1);
+		i++;
 	}
-	int comp(int x){
-		return (f[x]==-1?x:f[x]=comp(f[x]));//O(1)
-	}
-	bool join(int i,int j){
-		bool con=comp(i)==comp(j);
-		if(!con)f[comp(i)]=comp(j);
-		return con;
-	}
-};
+	return dp[x]=rta;
+}
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	//freopen("input.txt","r",stdin);
-	int t,n,x,y,ans;
-	string s;	
-
-	scanf("%d\n",&t);
-	for(int i=1;i<=t;i++){
-		getline(cin,s);
-		n=s[0]-'A'+1;
-
-		ans=n;
-		//cout<<n;
-		UnionFind uf;
-		uf.init(n);
-
-		while(1){
-			if(!getline(cin,s)||s.empty())break;
-			
-			x=s[0]-'A';y=s[1]-'A';
-			
-			if(uf.comp(x)!=uf.comp(y)){
-				uf.join(x,y);
-				ans--;
-			}
-		}
-		if(i!=1)cout<<"\n";
-		cout<<ans<<"\n";
+	forn(i,MAXN)
+		dp[i]=-1;
+	cin>>n;
+	vi A(n);
+	forn(i,n){
+		int x;cin>>x;
+		A[i]=x;
+		esta[x]=true;
 	}
-
+	int rta=0;
+	forn(i,n){
+		rta=max(rta,f(A[i]));
+	}
+	cout<<rta<<"\n";
 	return 0;
 }

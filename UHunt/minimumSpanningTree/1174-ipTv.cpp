@@ -54,37 +54,37 @@ public:
 	}
 };
 
-/*
-struct UnionFind{
-	vector<int> f;
-	void init(int n){
-		f.clear(); f.insert(f.begin(),n,-1);
-	}
-	int comp(int x){
-		return (f[x]==-1?x:f[x]=comp(f[x]));//O(1)
-	}
-	bool join(int i,int j){
-		bool con=comp(i)==comp(j);
-		if(!con)f[comp(i)]=comp(j);
-		return con;
-	}
-};*/
+
+int t,m,n;
+vector<pair<int,ii>> g;
 
 int main()
 {
-	//ios::sync_with_stdio(false);
-	//cin.tie(NULL);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	//freopen("input.txt","r",stdin);
-	int n,m,a,b,tc=1;
-	while(cin>>n>>m){
-		if(n==0&&m==0)break;
-		UnionFind uf(n);
-		for(int i=0;i<m;i++){
-			cin>>a>>b;
-			a--;b--;
-			uf.unionSet(a,b);
+	cin>>t;
+	while(t--){
+		map<string,int> mp;int cont=1;
+		cin>>m>>n;
+		string u,v;int w;
+		forn(i,n){
+			cin>>u>>v>>w;
+			if(mp[u]==0) mp[u]=cont++;
+			if(mp[v]==0) mp[v]=cont++;
+			g.push_back({w,{mp[u],mp[v]}});
 		}
-		printf("Case %d: %d\n",tc++,uf.numDisjointSet() );
-	}	
+		sort(g.begin(),g.end());
+		int mst_cost=0;
+		UnionFind UF(m);
+		for(int i=0;i<n;i++){
+			pair<int,ii> front=g[i];
+			if(!UF.isSameSet(front.snd.fst,front.snd.snd)){
+				mst_cost+=front.fst;
+				UF.unionSet(front.snd.fst,front.snd.snd);
+			}
+		}
+		cout<<mst_cost<<"\n";
+	}
 	return 0;
 }
