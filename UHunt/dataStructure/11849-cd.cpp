@@ -17,7 +17,7 @@ int main()
 			a.insert(num);
 		}
 		while(m--){
-			cin>>num;
+			cin>>num;i
 			set<int>::iterator it;
 			it=a.find(num);
 			if(it!=a.end())
