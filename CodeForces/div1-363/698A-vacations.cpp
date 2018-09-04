@@ -18,35 +18,23 @@ typedef pair<int,int> ii;
 #define dprv(vec) dpra(vec,sz(vec))
 typedef vector<int> vi;
 
-int N,v[110];
-
-long long f(int i,char ant){
-	if(i>=N) return 0;
-	if(v[i]==0) return f(i+1,0)+1;
-	if(v[i]==1){
-		if(ant=='0') return min(f(i+1,'C')+1,f(i+1,'C'));
-		if(ant=='C') return f(i+1,'C');
-		if(ant=='G') return min(f(i+1,'C')+1,f(i+1,'C'));
-	}
-	if(v[i]==2){
-		if(ant=='0') return min(f(i+1,'G')+1,f(i+1,'G'));
-		if(ant=='G') return f(i+1,'G');
-		if(ant=='C') return min(f(i+1,'G')+1,f(i+1,'G')); 
-	}
-	if(v[i]==3){
-		if(ant=='G') return min(f(i+1,'C')+1,f(i+1,'C'));
-		if(ant=='C') return min(f(i+1,'G')+1,f(i+1,'G'));
-		//if(ant=='0') 
-	}
-}
+int n,v[110];
+const int INF = 10000;
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	//freopen("input.txt","r",stdin);
-	cin>>N;
-	forn(i,N) cin>>v[i];
-	cout<<f(0,'0')<<"\n";
+	cin>>n;
+	forn(i,n) cin>>v[i];
+	int dp[110][110];
+	for(int i=1;i<=n;i++){
+		dp[i][0]=1+min(dp[i-1][0],min(dp[i-1][1],dp[i-1][2]));
+		dp[i][1]=(v[i-1]==0||v[i-1]==1) ? INF : min(dp[i-1][0],dp[i-1][2]);
+		dp[i][2]=(v[i-1]==0||v[i-1]==2) ? INF : min(dp[i-1][0],dp[i-1][1]);
+	}
+
+	cout<<min(dp[n][0],min(dp[n][1],dp[n][2]))<<"\n";
 	return 0;
 }
