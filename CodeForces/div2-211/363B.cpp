@@ -23,11 +23,11 @@ int n,k,dp[1000000];
 int main(){
 	ios::sync_with_stdio(0);
 	cin.tie(NULL);
-	freopen("input.txt", "r", stdin);
+	//freopen("input.txt", "r", stdin);
 	cin>>n>>k;
 	int k2=k;
 	//dp[0]=1e9;
-	queue<int> q;int a,i=1;
+	queue<int> q;int a,i=0;
 	while(k--){
 		cin>>a;
 		q.push(a);
@@ -39,12 +39,14 @@ int main(){
 		cin>>a;
 		//cout<<a<<" ";
 		q.push(a);
-		dp[++i]=dp[i-1]+a-q.front();
+		i++;
+		dp[i]=dp[i-1]+a-q.front();
 		q.pop();
 	}
 	//forn(j,i+1) cout<<dp[j]<<" ";
-	int pos=min_element(dp+1,dp+i)-dp;
-	cout<<pos<<"\n";
+	//cout<<"\n"<<i+1<<"\n";
+	int pos=min_element(dp+1,dp+i+1)-dp;
+	cout<<pos+1<<"\n";
 	
 	return 0;
 }
