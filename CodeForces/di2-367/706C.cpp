@@ -17,37 +17,44 @@ typedef vector<int> vi;
 #define dpr(v) cout << #v"=" << v << endl //;)
 #define dpra(a,n) { forn(i,(n)) cout << (a)[i] << (i==(n)-1?'\n':' '); }
 #define dprv(vec) dpra(vec,sz(vec))
+#define all(v) (v).begin(), (v).end()
 
-int n,k,dp[1000000];
+string rev(string s){
+	reverse(all(s));
+	return s;
+}
+
+const long long oo= 1e16;
+int n,c[100100];
+vector<string> s(100100);
+long long dp[100100][2];
 
 int main(){
 	ios::sync_with_stdio(0);
 	cin.tie(NULL);
-	//freopen("input.txt", "r", stdin);
-	cin>>n>>k;
-	int k2=k;
-	//dp[0]=1e9;
-	queue<int> q;int a,i=0;
-	zero(dp);
-	while(k--){
-		cin>>a;
-		q.push(a);
-		//cout<<a<<" ";
-		dp[i]+=a;
+	//freopen("706C.txt", "r", stdin);
+	cin>>n;
+	for(int i=1;i<=n;i++)
+		cin>>c[i];
+	for(int i=1;i<=n;i++)
+		cin>>s[i];
+	dp[0][1]=dp[0][0]=0;
+	for(int i=1;i<=n;i++){
+		dp[i][1]=dp[i][0]=oo;
+		if(s[i]>=s[i-1])
+			dp[i][0]=dp[i-1][0];
+		if(s[i]>=rev(s[i-1]))
+			dp[i][0]=min(dp[i][0],dp[i-1][1]);
+		if(rev(s[i])>=s[i-1])
+			dp[i][1]=c[i]+dp[i-1][0];
+		if(rev(s[i])>=rev(s[i-1]))
+			dp[i][1]=min(dp[i][1],c[i]+dp[i-1][1]);
 	}
-	//cout<<"---"<<dp[i]<<" "<<i<<"\n";
-	forn(j,n-k2){
-		cin>>a;
-		//cout<<a<<"entra ";
-		q.push(a);
-		i++;
-		dp[i]=dp[i-1]+a-q.front();
-		q.pop();
-	}
-	//forn(j,i+1) cout<<dp[j]<<" ";
-	//cout<<"\n"<<i+1<<"\n";
-	int pos=min_element(dp,dp+i+1)-dp;
-	cout<<pos+1<<"\n";
+	ll ans = min(dp[n][1],dp[n][0]);
+	if(ans>=oo)
+		cout<<-1<<"\n";
+	else
+		cout<<ans<<"\n";
 	
 	return 0;
 }

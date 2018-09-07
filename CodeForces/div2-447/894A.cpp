@@ -18,36 +18,27 @@ typedef vector<int> vi;
 #define dpra(a,n) { forn(i,(n)) cout << (a)[i] << (i==(n)-1?'\n':' '); }
 #define dprv(vec) dpra(vec,sz(vec))
 
-int n,k,dp[1000000];
+string s;
 
 int main(){
 	ios::sync_with_stdio(0);
 	cin.tie(NULL);
-	//freopen("input.txt", "r", stdin);
-	cin>>n>>k;
-	int k2=k;
-	//dp[0]=1e9;
-	queue<int> q;int a,i=0;
-	zero(dp);
-	while(k--){
-		cin>>a;
-		q.push(a);
-		//cout<<a<<" ";
-		dp[i]+=a;
+	//freopen("894A.txt", "r", stdin);
+	cin>>s;
+	int cont=0,n=s.size();
+	forn(i,n){
+		if(s[i]=='Q'){
+			forr(j,i,n){
+				if(s[j]=='A'){
+					forr(e,j,n){
+						if(s[e]=='Q'){
+							cont++;
+						}
+					}
+				}
+			}
+		}
 	}
-	//cout<<"---"<<dp[i]<<" "<<i<<"\n";
-	forn(j,n-k2){
-		cin>>a;
-		//cout<<a<<"entra ";
-		q.push(a);
-		i++;
-		dp[i]=dp[i-1]+a-q.front();
-		q.pop();
-	}
-	//forn(j,i+1) cout<<dp[j]<<" ";
-	//cout<<"\n"<<i+1<<"\n";
-	int pos=min_element(dp,dp+i+1)-dp;
-	cout<<pos+1<<"\n";
-	
+	cout<<cont<<"\n";
 	return 0;
 }
