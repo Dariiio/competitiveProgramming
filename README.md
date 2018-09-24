@@ -5,4 +5,4 @@
   for(int i=0;i<n;i++)
   //wooow esto es genial
 ```
-## [memo](memo.txt)
+## [memo](memo.md)
