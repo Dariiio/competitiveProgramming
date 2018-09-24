@@ -1,0 +1,34 @@
+<---------------------------------------------------------->
+
+------RECORDATORIO DE COSAS QUE SIEMPRE OLVIDO DE CP--------
+
+<---------------------------------------------------------->
+
+1) Como sumar o restar N desde un índice en un array sin 
+salir de memoria:
+	forn(i,n)
+		if(i==posQueQuiero)
+			i=(i+array.size()+-N)%array.size();
+			
+<---------------------------------------------------------->
+		
+2) Obtener la posición del min/max_element() de un array
+	int v[n]={...};
+	pos_max=max_element(v,v+n)-v;
+	//si es un vector 
+	int pos_max=max_element(v.begin(),v.end())-v.begin();
+
+<---------------------------------------------------------->
+
+3) No agregar elementos repetidos en un set o algo
+	set<int> st;
+	cin>>a;
+	if(!st.count(a))
+		st.insert(a);
+		
+<---------------------------------------------------------->
+
+4) Obtener dígitos de un número
+	while(num)
+		int dig=num%10;
+		num=num/10;
