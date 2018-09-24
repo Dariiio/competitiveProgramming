@@ -21,7 +21,6 @@ typedef vector<int> vi;
 
 int n;
 ll x[100100],h[100100];
-vector<ii> v;
 
 int main(){
 	ios::sync_with_stdio(0);
@@ -29,34 +28,20 @@ int main(){
 	//freopen("Problem-B.txt", "r", stdin);
 	cin>>n;
 	forn(i,n) cin>>x[i]>>h[i];
-	
-	v.pb({x[0]-h[0],x[0]});
-	//if(x[0]+h[0]<x[1]) v.pb({x[0],x[0]+h[0]});
-	if(n>1){
-		for(int i=1;i<n-1;i++){
-			int p=0;
-			if(x[i]+h[i]<x[i+1]){
-				//v.pb({x[i],x[i]+h[i]});
-				p++;
-			}
-			if(x[i]-h[i]>x[i-1]){
-				//v.pb({x[i]-h[i],x[i]});
-				p++;
-			}
-			if(p==2){
-				v.pb({x[i]-h[i],x[i]});
-			}else if(p==1) 
-			{
-				v.pb({x[i],x[i]+h[i]});
-			}
-		}
-		if(x[n-1]-h[n-1]>x[n-2]) v.pb({x[n-1]-h[n-1],x[n-1]});
-		else v.pb({x[n-1],x[n-1]+h[n-1]});
+	int l=x[0];
+	int ans=2;
+	forr(i,1,n-1){
+		if(l<(x[i]-h[i])){
+			l=x[i];
+			ans++;
+		}else if((x[i]+h[i])<x[i+1]){
+			ans++;
+			l=x[i]+h[i];
+		}else
+			l=x[i];
 	}
-	cout<<v.size();
-	cout<<"\n\n------\n";
-	for(auto &a:v)
-		cout<<"\n"<<a.fst<<" "<<a.snd;
+	if(n==1)cout<<1;
+	else cout<<ans;
 	
 	return 0;
 }
