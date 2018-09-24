@@ -27,7 +27,7 @@ while(num){
   num=num/10;
 }
 ```
-* Elevar 2 a la n:
+* Calcular 2^n:
 ```cpp
-1<<n;
+int res = 1<<n;
 ```
