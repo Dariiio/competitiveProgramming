@@ -32,3 +32,24 @@ salir de memoria:
 	while(num)
 		int dig=num%10;
 		num=num/10;
+
+<---------------------------------------------------------->
+
+5) DFS y Topological sort
+
+	vector<int> g[110];
+	vector<int> ts;
+	vector<bool> visit;
+	
+	void dfs2(int u){
+		visit[u]=true;
+		//cout<<u<<" ";
+		for(auto a:g[u]){
+			if(!visit[a]){
+				dfs2(a);
+			}
+		}
+		//tss[id--]=u;
+		ts.push_back(u);
+	}
+	
