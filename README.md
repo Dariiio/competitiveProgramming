@@ -29,7 +29,8 @@ int main(){
 	return 0;
 }
 ```
-## [Estructura de Datos](Otros/dataStructures.md)
+## Cosas que tiro por ahi...
+* [Estructura de Datos](/Otros/dataStructure.md)
 ## Recordatorio de cosas que siempre olvido...
 * Como sumar o restar N desde un índice en un arreglo sin salir de memoria:
 ```cpp
