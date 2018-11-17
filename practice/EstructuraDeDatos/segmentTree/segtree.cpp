@@ -1,4 +1,4 @@
-//FUNCIONA CON LAS LLAMASDAS BIEN HECHAS  https://cp-algorithms.com/data_structures/segment_tree.html
+//FUNCIONA CON LAS LLAMASDAS BIEN HECHAS 
 #include <bits/stdc++.h>
 using namespace std;
 #define forr(i,a,b) for(int i=(a); i<(b); i++)
