@@ -11,11 +11,30 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 typedef vector<int> vi;
+const int INF = 1000000000;
 
 
 int main()
 {
-    
+    ios::sync_with_stdio(0);cin.tie(NULL);
+	int n,a[1000100],ant = -1;
+	cin>>n;
+	
+	forn(i,n) cin>>a[i];
+	sort(a,a+n,greater<int>());
+	
+	
+	forn(i,n){
+		
+		if(ant == -1)
+			ant = a[i];
+		else{
+			ant = abs(ant-a[i]);
+		}
+	}
+	
+	if(ant == 0) cout<<"YES\n";
+	else cout<<"NO\n";
     
     return 0;
 }
